@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Els meus cursos | Moodle</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%230da7e8' d='M17 49a13 13 0 0 1-1-26 18 18 0 0 1 34-3 15 15 0 0 1-1 29z'/%3E%3C/svg%3E">
+  <style>
+    :root { --blue:#159bd7; --dark:#17324a; --muted:#687887; --line:#dce3e8; --bg:#f7f9fb; }
+    * { box-sizing:border-box }
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; color:#202b35; background:#fff; }
+    header { height:68px; border-bottom:1px solid var(--line); display:flex; align-items:center; padding:0 28px; gap:28px; position:sticky; top:0; background:#fff; z-index:5; }
+    .brand { display:flex; align-items:center; gap:12px; color:var(--dark); font-weight:700; font-size:21px; text-decoration:none; margin-right:12px; }
+    .cloud { width:42px; height:32px; display:block; }
+    nav { display:flex; height:100%; align-items:stretch; gap:24px; }
+    nav button { border:0; background:none; padding:0 4px; color:#34495a; font-size:15px; cursor:pointer; border-bottom:3px solid transparent; }
+    nav button.active { color:#087cc1; border-bottom-color:#087cc1; }
+    .right { margin-left:auto; color:#647583; font-size:13px; }
+    main { max-width:1060px; margin:34px auto; padding:0 24px 60px; }
+    h1 { font-size:31px; margin:0 0 14px; color:#1d2c3a; }
+    h2 { font-size:21px; margin:0 0 10px; }
+    .welcome { font-size:27px; font-weight:700; margin:18px 0 10px; }
+    .sub { color:var(--muted); margin:0 0 28px; }
+    .rule { border:0; border-top:1px solid var(--line); margin:24px 0 20px; }
+    .toolbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+    .pill { border:1px solid #aab7c2; border-radius:9px; padding:10px 15px; color:#526575; background:#fff; }
+    .search { flex:1; min-width:180px; }
+    .panel { background:#fff; border:1px solid var(--line); border-radius:13px; padding:28px; max-width:510px; box-shadow:0 8px 24px rgba(25,54,76,.06); margin:42px auto; text-align:center; }
+    .lock { width:58px; height:58px; border-radius:18px; background:#e8f6fd; color:#078ccc; display:grid; place-items:center; margin:0 auto 16px; font-size:28px; }
+    .panel p { color:var(--muted); line-height:1.5; }
+    input { width:100%; padding:14px 15px; border:1px solid #b9c5ce; border-radius:8px; font-size:17px; margin:12px 0 10px; outline-color:var(--blue); }
+    .primary { background:#087fbd; color:white; border:0; padding:13px 22px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; }
+    .primary:hover { background:#066da4; }
+    .error { color:#bd3434 !important; min-height:20px; font-size:14px; margin:5px 0 0; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .game { border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; transition:transform .15s,box-shadow .15s; }
+    .game:hover { transform:translateY(-3px); box-shadow:0 8px 22px rgba(25,54,76,.10); }
+    .art { height:145px; display:flex; align-items:center; justify-content:center; font-size:62px; position:relative; overflow:hidden; }
+    .snow { background:linear-gradient(140deg,#d9f3ff,#8bc9e9 55%,#eafaff); }
+    .moto { background:linear-gradient(140deg,#ffdb9a,#ff9d6a 55%,#e95b56); }
+    .roll { background:linear-gradient(140deg,#c9f5e8,#58c5ad 55%,#2e8da5); }
+    .cube { background:linear-gradient(140deg,#e4d9ff,#9d87ef 55%,#594ac2); }
+    .dash { background:linear-gradient(140deg,#fff0a8,#ffca54 55%,#f28a48); }
+    .brain { background:linear-gradient(140deg,#d9eaff,#83b5ef 55%,#4878bd); }
+    .tag { position:absolute; top:12px; left:12px; background:rgba(255,255,255,.88); padding:5px 9px; border-radius:20px; font-size:11px; font-weight:700; color:#395164; }
+    .info { padding:15px 16px 17px; }
+    .info h3 { margin:0 0 7px; font-size:17px; color:#087bc0; }
+    .info p { margin:0 0 15px; color:#657583; font-size:13px; min-height:32px; line-height:1.4; }
+    .play { display:inline-block; text-decoration:none; background:#eaf6fc; color:#0878b7; font-weight:700; border-radius:7px; padding:9px 13px; font-size:13px; }
+    .play:hover { background:#d7effb; }
+    .hidden { display:none !important; }
+    .note { font-size:12px; color:#8996a0; margin-top:24px; }
+    @media(max-width:760px) { header{padding:0 14px;gap:15px}.brand span{display:none} nav{gap:15px} main{margin-top:25px;padding:0 15px 40px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media(max-width:500px) { .grid{grid-template-columns:1fr}.art{height:160px} h1{font-size:27px}.welcome{font-size:23px} }
+  </style>
+</head>
+<body>
+<header>
+  <a class="brand" href="#" onclick="showHome();return false;" aria-label="Moodle inici">
+    <svg class="cloud" viewBox="0 0 64 48" aria-hidden="true"><path fill="#159bd7" d="M17 40C7.6 40 2 33.5 2 25.5S8.5 11 17 11c2.1 0 4.1.4 5.9 1.2C27.1 4.8 35.4 1 43 4.2c6.5 2.7 10.2 8.6 10.2 15.2C60.5 20.1 63 25.2 63 30.1 63 36 58.3 40 51.8 40H17z"/></svg>
+    <span>Moodle</span>
+  </a>
+  <nav>
+    <button id="homeTab" class="active" onclick="showHome()">Inici</button>
+    <button id="boardTab" onclick="showBoard()">Tauler</button>
+  </nav>
+  <div class="right">Espai de jocs</div>
+</header>
+
+<main>
+  <section id="homePage">
+    <h1>Inici</h1>
+    <div class="welcome">Hola! 👋</div>
+    <h2>Benvingut a Moodle</h2>
+    <p class="sub">Resum dels cursos</p>
+    <hr class="rule">
+    <div class="toolbar"><span class="pill">Tots</span><span class="pill">Els meus cursos</span></div>
+    <div class="panel" style="margin-top:28px">
+      <div class="lock">☁️</div>
+      <h2>Tauler</h2>
+      <p>Accedeix al teu tauler personal.</p>
+      <button class="primary" onclick="showBoard()">Entrar al Tauler</button>
+    </div>
+  </section>
+
+  <section id="gatePage" class="hidden">
+    <h1>Tauler</h1>
+    <hr class="rule">
+    <div class="panel">
+      <div class="lock">🔒</div>
+      <h2>Accés al tauler</h2>
+      <p>Per entrar a la zona de videojocs, escriu el codi d'accés.</p>
+      <form onsubmit="unlock(event)">
+        <input id="code" type="password" inputmode="numeric" placeholder="Introdueix el codi" autocomplete="off" aria-label="Codi d'accés">
+        <button class="primary" type="submit">Entrar</button>
+        <p id="error" class="error" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="gameViewer" class="hidden">
+    <div class="toolbar" style="justify-content:space-between;align-items:center">
+      <button class="pill" type="button" onclick="backToGames()">← Tornar al tauler</button>
+      <span id="gameTitle" style="font-weight:700;color:#17324a">Joc</span>
+    </div>
+    <div style="width:100%;height:min(72vh,720px);min-height:420px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#101820">
+      <iframe id="gameFrame" title="Joc" src="about:blank" style="width:100%;height:100%;border:0" allow="fullscreen *; autoplay *; gamepad *; accelerometer *; gyroscope *" allowfullscreen></iframe>
+    </div>
+    <p class="note">El joc es carrega dins Moodle. Si el lloc del joc no permet mostrar-lo en una finestra integrada, pot ser que no es pugui veure aquí.</p>
+  </section>
+
+  <section id="gamesPage" class="hidden">
+    <h1>Els meus cursos</h1>
+    <div class="welcome">Hola! 👋</div>
+    <p class="sub">Resum dels cursos</p>
+    <hr class="rule">
+    <div class="toolbar"><span class="pill">Tots els jocs</span><span class="pill">6 jocs disponibles</span></div>
+    <div class="grid">
+      <article class="game">
+        <div class="art snow"><span class="tag">Més jugat</span>🛷</div>
+        <div class="info"><h3>Snow Rider 3D</h3><p>Baixa per una muntanya nevada i esquiva tots els obstacles.</p><button class="play" type="button" onclick="openGame('Snow Rider 3D','https://tsnowrider.github.io/')">Jugar ara</button></div>
+      </article>
+      <article class="game">
+        <div class="art moto"><span class="tag">Carreres</span>🏍️</div>
+        <div class="info"><h3>Moto X3M</h3><p>Supera circuits de motos plens de salts i obstacles.</p><button class="play" type="button" onclick="openGame('Moto X3M','https://www.crazygames.com/es/game/moto-x3m')">Jugar ara</button></div>
+      </article>
+      <article class="game">
+        <div class="art roll"><span class="tag">Arcade</span>🟢</div>
+        <div class="info"><h3>Crazy Roll 3D</h3><p>Controla una bola a tota velocitat i evita els obstacles.</p><button class="play" type="button" onclick="openGame('Crazy Roll 3D','https://www.crazygames.com/game/crazy-roll-3d')">Jugar ara</button></div>
+      </article>
+      <article class="game">
+        <div class="art cube"><span class="tag">Multijugador</span>🔢</div>
+        <div class="info"><h3>Cubes 2048.io</h3><p>Ajunta cubs, creix i intenta superar els altres jugadors.</p><button class="play" type="button" onclick="openGame('Cubes 2048.io','https://www.crazygames.com/game/cubes-2048-io')">Jugar ara</button></div>
+      </article>
+      <article class="game">
+        <div class="art dash"><span class="tag">Carreres</span>🌴</div>
+        <div class="info"><h3>Moto X3M: Pool Party</h3><p>Fes acrobàcies i supera circuits plens de salts i reptes.</p><a class="play" href="https://www.crazygames.com/es/game/moto-x3m-pool-party" target="_blank" rel="noopener">Jugar ara ↗</a></div>
+      </article>
+      <article class="game">
+        <div class="art brain"><span class="tag">Creativitat</span>🧪</div>
+        <div class="info"><h3>Little Alchemy</h3><p>Combina elements i descobreix noves creacions.</p><button class="play" type="button" onclick="openGame('Little Alchemy','https://littlealchemy.com/')">Jugar ara</button></div>
+      </article>
+    </div>
+    <p class="note">Els jocs s'obren en una pestanya nova. Alguns poden mostrar anuncis o tenir restriccions segons el navegador.</p>
+  </section>
+</main>
+
+<script>
+  const homePage = document.getElementById('homePage');
+  const gatePage = document.getElementById('gatePage');
+  const gamesPage = document.getElementById('gamesPage');
+  const gameViewer = document.getElementById('gameViewer');
+  const homeTab = document.getElementById('homeTab');
+  const boardTab = document.getElementById('boardTab');
+  let unlocked = false;
+
+  function setActive(tab) {
+    homeTab.classList.toggle('active', tab === 'home');
+    boardTab.classList.toggle('active', tab === 'board');
+  }
+  function hideAll() {
+    homePage.classList.add('hidden');
+    gatePage.classList.add('hidden');
+    gamesPage.classList.add('hidden');
+    gameViewer.classList.add('hidden');
+  }
+  function showHome() {
+    hideAll(); homePage.classList.remove('hidden'); setActive('home');
+  }
+  function showBoard() {
+    hideAll();
+    if (unlocked) gamesPage.classList.remove('hidden');
+    else gatePage.classList.remove('hidden');
+    setActive('board');
+    if (!unlocked) setTimeout(() => document.getElementById('code').focus(), 50);
+  }
+  function openGame(title, url) {
+    hideAll();
+    gameViewer.classList.remove('hidden');
+    document.getElementById('gameTitle').textContent = title;
+    const frame = document.getElementById('gameFrame');
+    frame.src = url;
+    frame.title = title;
+    setActive('board');
+  }
+  function backToGames() {
+    document.getElementById('gameFrame').src = 'about:blank';
+    hideAll();
+    gamesPage.classList.remove('hidden');
+    setActive('board');
+  }
+  function unlock(event) {
+    event.preventDefault();
+    const input = document.getElementById('code');
+    if (input.value === '123') {
+      unlocked = true;
+      input.value = '';
+      document.getElementById('error').textContent = '';
+      showBoard();
+    } else {
+      document.getElementById('error').textContent = 'Codi incorrecte. Torna-ho a provar!';
+      input.select();
+    }
+  }
+</script>
+</body>
+</html>
