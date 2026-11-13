@@ -57,28 +57,72 @@
 </section>
 <section id="gamesPage" class="page hidden">
   <h1>Els meus jocs</h1><p class="home-sub">Tria un joc per començar a jugar.</p><hr class="rule">
-  <div class="games-grid">
-    <article class="game"><div class="game-art snow">🛷</div><div class="game-info"><h3>Snow Rider 3D</h3><p>Baixa per una muntanya nevada i esquiva obstacles.</p><button class="play" onclick="openGame('Snow Rider 3D','https://tsnowrider.github.io/')">Jugar ara</button></div></article>
-   <article class="game">
-  <div class="game-art moto">🚗</div>
-  <div class="game-info">
-    <h3>GTA III</h3>
-    <p>Explora el món de Grand Theft Auto III.</p>
-    <button class="play" onclick="openGame('GTA III','https://quenq.com/apps/gta-3/')">Jugar ara</button>
-  </div>
-</article>
- 
 
-<article class="game"><div class="game-art roll">🚗</div><div class="game-info"><h3>Escape Road 3</h3><p>Escapa de la policia i intenta arribar tan lluny com puguis.</p><button class="play" onclick="openGame('Escape Road 3','https://azgames.io/escape-road-3')">Jugar ara</button></div></article>
-<article class="game"><div class="game-art cube">🔢</div><div class="game-info"><h3>Cubes 2048.io</h3><p>Ajunta cubs i intenta superar els altres jugadors.</p><button class="play" onclick="openGame('Cubes 2048.io','https://www.crazygames.com/game/cubes-2048-io')">Jugar ara</button></div></article>
-<article class="game"><div class="game-art brain">🤸</div><div class="game-info"><h3>Flip Rush</h3><p>Fes salts i acrobàcies i supera els reptes!</p><button class="play" onclick="openGame('Flip Rush','https://cookie-clicker2.com/flip-rush')">Jugar ara</button></div></article>
-<article class="game"><div class="game-art roll">🚗</div><div class="game-info"><h3>Escape Road</h3><p>Condueix i intenta escapar de la policia!</p><button class="play" onclick="openGame('Escape Road','https://cookie-clicker2.com/escape-road')">Jugar ara</button></div></article>
+<div class="games-grid">
+  <article class="game">
+    <div class="game-art snow">🛷</div>
+    <div class="game-info">
+      <h3>Snow Rider 3D</h3>
+      <p>Baixa per una muntanya nevada i esquiva obstacles.</p>
+      <button class="play" onclick="openGame('Snow Rider 3D','https://tsnowrider.github.io/')">Jugar ara</button>
+    </div>
+  </article>
+
+  <article class="game">
+    <div class="game-art moto">🚗</div>
+    <div class="game-info">
+      <h3>GTA III</h3>
+      <p>Explora el món de Grand Theft Auto III.</p>
+      <button class="play" onclick="openGame('GTA III','https://quenq.com/apps/gta-3/')">Jugar ara</button>
+    </div>
+  </article>
+
+  <article class="game">
+    <div class="game-art roll">🚗</div>
+    <div class="game-info">
+      <h3>Escape Road 3</h3>
+      <p>Escapa de la policia i intenta arribar tan lluny com puguis.</p>
+      <button class="play" onclick="openGame('Escape Road 3','https://azgames.io/escape-road-3')">Jugar ara</button>
+    </div>
+  </article>
+
+  <article class="game">
+    <div class="game-art cube">🔢</div>
+    <div class="game-info">
+      <h3>Cubes 2048.io</h3>
+      <p>Ajunta cubs i intenta superar els altres jugadors.</p>
+      <button class="play" onclick="openGame('Cubes 2048.io','https://www.crazygames.com/game/cubes-2048-io')">Jugar ara</button>
+    </div>
+  </article>
+
+  <article class="game">
+    <div class="game-art roll">🤸</div>
+    <div class="game-info">
+      <h3>Flip Rush</h3>
+      <p>Fes salts i acrobàcies i supera els reptes!</p>
+      <button class="play" onclick="openGame('Flip Rush','https://cookie-clicker2.com/flip-rush')">Jugar ara</button>
+    </div>
+  </article>
+
+  <article class="game">
+    <div class="game-art roll">🚗</div>
+    <div class="game-info">
+      <h3>Escape Road</h3>
+      <p>Condueix i intenta escapar de la policia!</p>
+      <button class="play" onclick="openGame('Escape Road','https://cookie-clicker2.com/escape-road')">Jugar ara</button>
+    </div>
+  </article>
 </div>
+
 <section id="gameViewer" class="page hidden">
-  <div class="viewer-bar"><button class="filter" type="button" onclick="backToGames()">← Tornar als jocs</button><strong id="gameTitle">Joc</strong></div>
+  <div class="viewer-bar">
+    <button class="filter" type="button" onclick="backToGames()">← Tornar als jocs</button>
+    <strong id="gameTitle">Joc</strong>
+  </div>
   <iframe id="gameFrame" title="Joc" src="about:blank" allow="fullscreen *; autoplay *; gamepad *" allowfullscreen></iframe>
   <p class="note">Alguns jocs poden no permetre's mostrar dins d'aquesta finestra. Si passa, prova d'obrir-los al seu web.</p>
 </section>
+
 
 </main>
 <script>
