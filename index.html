@@ -396,7 +396,9 @@ document.getElementById("gateForm").addEventListener("submit", function(event) {
   }
 });
 
-function openGame(title,url) {
+function openGame(title, url) {
+    window.open(url, "_blank", "noopener,noreferrer");
+}
   if (!unlocked) {
     showPage("gatePage");
     return;
