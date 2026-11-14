@@ -3,357 +3,390 @@
 <html lang="ca">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Els meus cursos | Moodle</title>
 <style>
 :root {
-  --blue: #0f6cbf;
-  --blue-dark: #0b579a;
-  --bg: #f8f9fa;
-  --border: #dee2e6;
-  --text: #343a40;
+  --blue:#1769aa;
+  --dark:#263746;
+  --light:#f4f6f8;
+  --border:#e1e5e9;
 }
-* { box-sizing: border-box; }
+* { box-sizing:border-box; }
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  background: var(--bg);
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:#303b45;
 }
-button,input,select { font: inherit; }
-button { cursor: pointer; }
-
 header {
-  height: 62px;
-  background: white;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 4%;
-  gap: 25px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  height:66px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #343a40;
-  text-decoration: none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--blue);
+  font-size:22px;
+  font-weight:bold;
 }
-.logo img { width: 38px; height: 34px; object-fit: contain; }
-nav { display: flex; height: 100%; }
+.logo-icon { font-size:29px; }
+nav { display:flex; gap:28px; height:66px; align-items:center; }
 nav button {
-  border: 0;
-  background: white;
-  padding: 0 16px;
-  border-bottom: 3px solid transparent;
-  color: #343a40;
+  height:66px;
+  border:0;
+  background:none;
+  color:#48545e;
+  font-size:15px;
+  cursor:pointer;
+  border-bottom:3px solid transparent;
+  padding:0 3px;
 }
-nav button:hover, nav button.active {
-  color: var(--blue);
-  border-bottom-color: var(--blue);
+nav button.active {
+  color:var(--blue);
+  border-bottom-color:var(--blue);
+  font-weight:bold;
 }
-.spacer { flex: 1; }
-
+.profile {
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#e7edf2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.profile span { display:none; }
 main {
-  max-width: 1280px;
-  margin: 28px auto;
-  padding: 0 24px;
+  max-width:1200px;
+  margin:35px auto;
+  padding:0 24px;
 }
-.page { display: none; }
-.page.active { display: block; }
-.breadcrumb {
-  color: #6c757d;
-  font-size: 13px;
-  margin-bottom: 18px;
+.page { display:none; }
+.page.active { display:block; }
+h1 { font-size:27px; font-weight:500; margin:0 0 12px; }
+h2 { font-size:19px; font-weight:500; margin:28px 0 15px; }
+.subtitle { color:#687580; margin-bottom:25px; }
+.rule { border:0; border-top:1px solid var(--border); margin:20px 0; }
+.panel {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:7px;
+  padding:22px;
+  margin-bottom:22px;
 }
-h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
-.subtitle { color: #6c757d; }
-hr { border: 0; border-top: 1px solid var(--border); margin: 22px 0; }
-
-.btn {
-  background: var(--blue);
-  color: white;
-  border: 1px solid var(--blue);
-  border-radius: 4px;
-  padding: 10px 16px;
+.course-tools {
+  display:flex;
+  gap:12px;
+  margin:20px 0;
+  flex-wrap:wrap;
 }
-.btn:hover { background: var(--blue-dark); }
-.btn-light {
-  color: var(--blue);
-  background: white;
-  border-color: #adb5bd;
+input,select {
+  padding:12px;
+  border:1px solid #cbd3da;
+  border-radius:5px;
+  font-size:14px;
+  background:white;
 }
-.btn-light:hover { background: #f1f3f5; }
-
-.welcome {
-  background: white;
-  border: 1px solid var(--border);
-  padding: 32px;
-  border-radius: 4px;
+.search { flex:1; min-width:200px; }
+.course-grid,.games-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:20px;
 }
-.welcome p { color: #6c757d; }
-.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-
-.toolbar {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr;
-  gap: 10px;
-  margin: 20px 0;
+.course,.game {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+  transition:transform .15s,box-shadow .15s;
 }
-.control {
-  width: 100%;
-  padding: 11px;
-  border: 1px solid #adb5bd;
-  border-radius: 4px;
-  background: white;
+.course:hover,.game:hover {
+  transform:translateY(-3px);
+  box-shadow:0 5px 16px #00000012;
 }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 18px;
+.course-art {
+  height:125px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
+  color:white;
 }
-.card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
+.art1 { background:#4779a8; }
+.art2 { background:#ad765c; }
+.art3 { background:#6c9b87; }
+.art4 { background:#8b79a8; }
+.art5 { background:#bd9853; }
+.art6 { background:#668b9c; }
+.course-info,.game-info { padding:17px; }
+.course-info h3,.game-info h3 { margin:0 0 9px; font-size:17px; }
+.course-info p,.game-info p {
+  color:#697580;
+  font-size:13px;
+  line-height:1.5;
+  margin:0 0 15px;
 }
-.card-art {
-  height: 125px;
-  background: #e9f2f9;
-  display: grid;
-  place-items: center;
-  font-size: 50px;
-  border-bottom: 1px solid var(--border);
+.game-art {
+  height:145px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:58px;
 }
-.card-body { padding: 16px; }
-.card h3 {
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--blue);
-  margin: 0 0 8px;
+.snow { background:#dceefa; }
+.flip { background:#f5e5d5; }
+.escape { background:#e8e4d9; }
+.cookie { background:#f1e0bd; }
+.among { background:#dce7f0; }
+.play,.primary {
+  border:0;
+  background:var(--blue);
+  color:white;
+  padding:10px 16px;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:14px;
 }
-.card p { color: #6c757d; font-size: 14px; }
-.card .btn { margin-top: 12px; }
-
+.play:hover,.primary:hover { background:#10558d; }
+.secondary {
+  background:white;
+  border:1px solid #b9c5cf;
+  color:#344653;
+  padding:10px 16px;
+  border-radius:5px;
+  cursor:pointer;
+}
+.empty { color:#77838d; padding:25px 0; }
 .gate {
-  max-width: 520px;
-  margin: 45px auto;
-  background: white;
-  border: 1px solid var(--border);
-  padding: 30px;
-  text-align: center;
+  max-width:460px;
+  margin:65px auto;
+  text-align:center;
 }
-.gate input { margin: 15px 0; }
-.error { display: none; color: #b02a37; font-size: 14px; }
-
-.viewer {
-  display: none;
-  margin-top: 24px;
-  background: white;
-  border: 1px solid var(--border);
-}
-.viewer.active { display: block; }
-.viewer-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-}
-.viewer-header strong { flex: 1; }
-iframe {
-  width: 100%;
-  height: 75vh;
-  min-height: 400px;
-  border: 0;
-  background: #111;
-}
-.note { padding: 12px; color: #6c757d; font-size: 13px; }
-
+.gate .panel { padding:35px; }
+.gate-icon { font-size:45px; margin-bottom:12px; }
+.gate input { width:100%; margin:15px 0; }
+.error { color:#c0392b; font-size:14px; min-height:20px; }
 footer {
-  text-align: center;
-  color: #7b858d;
-  font-size: 12px;
-  padding: 35px;
+  text-align:center;
+  padding:25px;
+  color:#89939b;
+  font-size:12px;
 }
-
-@media(max-width:800px) {
-  .grid { grid-template-columns: repeat(2,1fr); }
-  .toolbar { grid-template-columns: 1fr 1fr; }
-}
-@media(max-width:550px) {
-  header { height: auto; padding: 12px; flex-wrap: wrap; gap: 8px; }
-  nav { width: 100%; height: 42px; justify-content: space-between; }
-  nav button { padding: 0 8px; font-size: 13px; }
-  .grid { grid-template-columns: 1fr; }
-  .toolbar { grid-template-columns: 1fr 1fr; }
-  main { padding: 0 13px; }
-  .viewer-header { flex-wrap: wrap; }
-  iframe { height: 65vh; min-height: 350px; }
+@media(max-width:650px) {
+  header { padding:0 14px; }
+  .logo { font-size:17px; }
+  nav { gap:12px; }
+  nav button { font-size:12px; }
+  main { margin:25px auto; padding:0 14px; }
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <a class="logo" href="#" onclick="showPage('homePage');return false">
-    <img src="https://m4.nigul.coop/pluginfile.php/1/core_admin/logo/0x200/1794677088/Cloud_2.png" alt="">
-    Moodle
-  </a>
+  <div class="logo">
+    <span class="logo-icon">☁</span>
+    <span>Moodle</span>
+  </div>
 
   <nav>
     <button class="active" data-page="homePage" onclick="showPage('homePage')">Inici</button>
     <button data-page="gatePage" onclick="showPage('gatePage')">Tauler</button>
     <button data-page="coursesPage" onclick="showPage('coursesPage')">Els meus cursos</button>
   </nav>
-  <div class="spacer"></div>
+
+  <div class="profile"><span></span></div>
 </header>
 
 <main>
 
-<section id="homePage" class="page active">
-  <div class="breadcrumb">Inici</div>
-  <div class="welcome">
-    <h1>Benvingut a Moodle</h1>
-    <p>Accedeix als teus cursos i activitats.</p>
-    <div class="actions">
-      <button class="btn" onclick="showPage('coursesPage')">Els meus cursos</button>
-      <button class="btn btn-light" onclick="showPage('gatePage')">Tauler</button>
+  <!-- INICI -->
+  <section id="homePage" class="page active">
+    <h1>Inici</h1>
+    <p class="subtitle">Benvingut a l'espai d'aprenentatge.</p>
+
+    <div class="panel">
+      <h2>Els meus cursos</h2>
+      <p>Consulta els teus cursos i accedeix als continguts.</p>
+      <button class="primary" onclick="showPage('coursesPage')">
+        Veure els meus cursos
+      </button>
     </div>
-  </div>
-</section>
 
-<section id="coursesPage" class="page">
-  <div class="breadcrumb">Inici › Els meus cursos</div>
-  <h1>Els meus cursos</h1>
-  <p class="subtitle">Resum dels cursos</p>
-  <hr>
-
-  <div class="toolbar">
-    <select id="category" class="control" onchange="filterCourses()">
-      <option value="all">Totes les categories</option>
-      <option value="llengues">Llengües</option>
-      <option value="altres">Altres</option>
-    </select>
-    <input id="search" class="control" placeholder="Cerca cursos..." oninput="filterCourses()">
-    <select id="progress" class="control" onchange="filterCourses()">
-      <option value="all">Tot el progrés</option>
-      <option value="started">En curs</option>
-      <option value="notstarted">No iniciats</option>
-    </select>
-    <select id="sort" class="control" onchange="filterCourses()">
-      <option value="default">Ordre per defecte</option>
-      <option value="az">Nom A-Z</option>
-      <option value="za">Nom Z-A</option>
-    </select>
-  </div>
-
-  <div class="grid" id="courseGrid">
-    <article class="card" data-category="llengues" data-progress="0" data-name="Castellà 2">
-      <div class="card-art">📝</div>
-      <div class="card-body"><h3>Castellà 2</h3><p>Mata de Jonc</p></div>
-    </article>
-    <article class="card" data-category="llengues" data-progress="14" data-name="Català 2n ESO">
-      <div class="card-art">📖</div>
-      <div class="card-body"><h3>Català 2n ESO</h3><p>Mata de Jonc</p></div>
-    </article>
-    <article class="card" data-category="altres" data-progress="0" data-name="Cooperació i Serveis a la Comunitat 2">
-      <div class="card-art">🤝</div>
-      <div class="card-body"><h3>Cooperació i Serveis a la Comunitat 2</h3><p>Mata de Jonc</p></div>
-    </article>
-    <article class="card" data-category="altres" data-progress="0" data-name="Educació Física 2n ESO">
-      <div class="card-art">⚽</div>
-      <div class="card-body"><h3>Educació Física 2n ESO</h3><p>Mata de Jonc</p></div>
-    </article>
-    <article class="card" data-category="llengues" data-progress="0" data-name="Anglès 2n ESO">
-      <div class="card-art">🌍</div>
-      <div class="card-body"><h3>Anglès 2n ESO</h3><p>Mata de Jonc</p></div>
-    </article>
-    <article class="card" data-category="altres" data-progress="0" data-name="Tecnologia 2n ESO">
-      <div class="card-art">⚙️</div>
-      <div class="card-body"><h3>Tecnologia 2n ESO</h3><p>Mata de Jonc</p></div>
-    </article>
-  </div>
-  <p id="empty" style="display:none">No s'han trobat cursos.</p>
-</section>
-
-<section id="gatePage" class="page">
-  <div class="breadcrumb">Inici › Tauler</div>
-  <div class="gate">
-    <div style="font-size:42px">🔒</div>
-    <h1>Accés al tauler</h1>
-    <p>Introdueix el codi per continuar.</p>
-    <form id="gateForm">
-      <input class="control" id="code" type="password" placeholder="Codi d'accés" required>
-      <button class="btn" type="submit">Entrar</button>
-    </form>
-    <p id="error" class="error">El codi no és correcte.</p>
-  </div>
-</section>
-
-<section id="gamesPage" class="page">
-  <div class="breadcrumb">Inici › Tauler › Videojocs</div>
-  <h1>Videojocs</h1>
-  <p class="subtitle">Tria un joc per començar.</p>
-  <hr>
-
-  <div class="grid" id="gameGrid">
-
-    <article class="card">
-      <div class="card-art">🛷</div>
-      <div class="card-body"><h3>Snow Rider 3D</h3><p>Baixa per una muntanya nevada.</p>
-      <button class="btn" onclick="openGame('Snow Rider 3D','https://tsnowrider.github.io/')">Jugar ara</button></div>
-    </article>
-
-    <article class="card">
-      <div class="card-art">🤸</div>
-      <div class="card-body"><h3>Flip Rush</h3><p>Fes salts i acrobàcies.</p>
-      <button class="btn" onclick="openGame('Flip Rush','https://cookie-clicker2.com/flip-rush')">Jugar ara</button></div>
-    </article>
-
-    <article class="card">
-      <div class="card-art">🚘</div>
-      <div class="card-body"><h3>Escape Road</h3><p>Condueix i supera els obstacles.</p>
-      <button class="btn" onclick="openGame('Escape Road','https://cookie-clicker2.com/escape-road')">Jugar ara</button></div>
-    </article>
-
-    <article class="card">
-      <div class="card-art">🍪</div>
-      <div class="card-body"><h3>Cookie Clicker</h3><p>Fes créixer la producció de galetes.</p>
-      <button class="btn" onclick="openGame('Cookie Clicker','https://cookie-clicker2.com/')">Jugar ara</button></div>
-    </article>
-
-    <article class="card">
-      <div class="card-art">🚀</div>
-      <div class="card-body"><h3>Among Us</h3><p>Joc multijugador de deducció.</p>
-      <button class="btn" onclick="openGame('Among Us','https://amongus-online.net/game/amongus')">Jugar ara</button></div>
-    </article>
-
-    <article class="card">
-      <div class="card-art">🚗</div>
-      <div class="card-body"><h3>GTA III</h3><p>Joc d'acció amb contingut per a adults.</p>
-      <button class="btn" onclick="openGame('GTA III','https://quenq.com/apps/gta-3/')">Jugar ara</button></div>
-    </article>
-
-  </div>
-
-  <div class="viewer" id="viewer">
-    <div class="viewer-header">
-      <button class="btn btn-light" onclick="backToGames()">← Tornar</button>
-      <strong id="gameTitle">Joc</strong>
-      <button class="btn" id="external">Obrir en una pestanya</button>
+    <div class="panel">
+      <h2>Tauler</h2>
+      <p>Accedeix a l'espai de jocs i activitats.</p>
+      <button class="primary" onclick="showPage('gatePage')">
+        Entrar al tauler
+      </button>
     </div>
-    <iframe id="gameFrame" title="Videojoc" src="about:blank" allow="fullscreen *; autoplay *; gamepad *" allowfullscreen></iframe>
-    <div class="note">Si el joc no es carrega, pot ser que la seva pàgina bloquegi la visualització integrada. Pots obrir-lo en una pestanya nova.</div>
-  </div>
-</section>
+  </section>
+
+  <!-- CURSOS -->
+  <section id="coursesPage" class="page">
+    <h1>Els meus cursos</h1>
+    <p class="subtitle">Resum dels cursos</p>
+    <hr class="rule">
+
+    <div class="course-tools">
+      <select id="category" onchange="filterCourses()">
+        <option value="all">Totes les categories</option>
+        <option value="llengues">Llengües</option>
+        <option value="altres">Altres</option>
+      </select>
+      <input class="search" id="search" type="search"
+        placeholder="Cerca un curs..." oninput="filterCourses()">
+    </div>
+
+    <div class="course-grid" id="courseGrid">
+
+      <article class="course" data-category="llengues">
+        <div class="course-art art1">🇪🇸</div>
+        <div class="course-info">
+          <h3>Castellà 2</h3>
+          <p>Continguts i activitats de castellà.</p>
+        </div>
+      </article>
+
+      <article class="course" data-category="llengues">
+        <div class="course-art art2">📚</div>
+        <div class="course-info">
+          <h3>Català 2n ESO</h3>
+          <p>Continguts i activitats de català.</p>
+        </div>
+      </article>
+
+      <article class="course" data-category="altres">
+        <div class="course-art art3">🤝</div>
+        <div class="course-info">
+          <h3>Cooperació i Serveis a la Comunitat 2</h3>
+          <p>Activitats i projectes de cooperació.</p>
+        </div>
+      </article>
+
+      <article class="course" data-category="altres">
+        <div class="course-art art4">⚽</div>
+        <div class="course-info">
+          <h3>Educació Física 2n ESO</h3>
+          <p>Activitats i continguts d'educació física.</p>
+        </div>
+      </article>
+
+      <article class="course" data-category="llengues">
+        <div class="course-art art5">🇬🇧</div>
+        <div class="course-info">
+          <h3>Anglès 2n ESO</h3>
+          <p>Continguts i activitats d'anglès.</p>
+        </div>
+      </article>
+
+      <article class="course" data-category="altres">
+        <div class="course-art art6">⚙️</div>
+        <div class="course-info">
+          <h3>Tecnologia 2n ESO</h3>
+          <p>Materials, eines i projectes tecnològics.</p>
+        </div>
+      </article>
+
+    </div>
+    <p id="noCourses" class="empty" style="display:none">No s'han trobat cursos.</p>
+  </section>
+
+  <!-- ACCÉS AL TAULER -->
+  <section id="gatePage" class="page">
+    <div class="gate">
+      <div class="panel">
+        <div class="gate-icon">🔒</div>
+        <h1>Accés al tauler</h1>
+        <p class="subtitle">Introdueix el codi per continuar.</p>
+
+        <form id="gateForm">
+          <input id="accessCode" type="password"
+            placeholder="Codi d'accés" autocomplete="off">
+          <button class="primary" type="submit" style="width:100%">
+            Entrar
+          </button>
+        </form>
+        <p class="error" id="gateError"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOCS -->
+  <section id="gamesPage" class="page">
+    <h1>Tauler</h1>
+    <p class="subtitle">Espai de videojocs</p>
+    <hr class="rule">
+
+    <div class="games-grid">
+
+      <article class="game">
+        <div class="game-art snow">🛷</div>
+        <div class="game-info">
+          <h3>Snow Rider 3D</h3>
+          <p>Baixa per una muntanya nevada i esquiva obstacles.</p>
+          <button class="play" onclick="openGame('https://tsnowrider.github.io/')">
+            Jugar ara
+          </button>
+        </div>
+      </article>
+
+      <article class="game">
+        <div class="game-art flip">🤸</div>
+        <div class="game-info">
+          <h3>Flip Rush</h3>
+          <p>Fes salts i acrobàcies per superar els nivells.</p>
+          <button class="play" onclick="openGame('https://cookie-clicker2.com/flip-rush')">
+            Jugar ara
+          </button>
+        </div>
+      </article>
+
+      <article class="game">
+        <div class="game-art escape">🚗</div>
+        <div class="game-info">
+          <h3>Escape Road</h3>
+          <p>Condueix i intenta escapar dels obstacles.</p>
+          <button class="play" onclick="openGame('https://cookie-clicker2.com/escape-road')">
+            Jugar ara
+          </button>
+        </div>
+      </article>
+
+      <article class="game">
+        <div class="game-art cookie">🍪</div>
+        <div class="game-info">
+          <h3>Cookie Clicker</h3>
+          <p>Fes galetes i millora la teva producció.</p>
+          <button class="play" onclick="openGame('https://cookie-clicker2.com/')">
+            Jugar ara
+          </button>
+        </div>
+      </article>
+
+      <article class="game">
+        <div class="game-art among">🚀</div>
+        <div class="game-info">
+          <h3>Among Us</h3>
+          <p>Completa tasques i descobreix què passa a la nau.</p>
+          <button class="play" onclick="openGame('https://amongus-online.net/game/amongus')">
+            Jugar ara
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </section>
 
 </main>
 
@@ -362,10 +395,11 @@ footer {
 <script>
 const ACCESS_CODE = "1234";
 let unlocked = sessionStorage.getItem("m4unlocked") === "yes";
-let currentUrl = "";
 
 function showPage(id) {
-  if (id === "gamesPage" && !unlocked) id = "gatePage";
+  if (id === "gamesPage" && !unlocked) {
+    id = "gatePage";
+  }
 
   document.querySelectorAll(".page").forEach(page => {
     page.classList.toggle("active", page.id === id);
@@ -375,84 +409,53 @@ function showPage(id) {
     button.classList.toggle("active", button.dataset.page === id);
   });
 
-  if (id !== "gamesPage") closeViewer();
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo(0, 0);
 }
 
 document.getElementById("gateForm").addEventListener("submit", function(event) {
   event.preventDefault();
 
-  const code = document.getElementById("code").value.trim();
-  const error = document.getElementById("error");
+  const code = document.getElementById("accessCode").value;
+  const error = document.getElementById("gateError");
 
   if (code === ACCESS_CODE) {
     unlocked = true;
-    sessionStorage.setItem("m4unlocked","yes");
-    error.style.display = "none";
-    document.getElementById("code").value = "";
+    sessionStorage.setItem("m4unlocked", "yes");
+    document.getElementById("accessCode").value = "";
+    error.textContent = "";
     showPage("gamesPage");
   } else {
-    error.style.display = "block";
+    error.textContent = "El codi no és correcte. Torna-ho a provar.";
   }
 });
 
-function openGame(title, url) {
-    window.open(url, "_blank", "noopener,noreferrer");
-}
-  if (!unlocked) {
-    showPage("gatePage");
-    return;
-  }
-
-  currentUrl = url;
-  document.getElementById("gameTitle").textContent = title;
-  document.getElementById("gameFrame").src = url;
-  document.getElementById("external").onclick = () => {
-    window.open(currentUrl,"_blank","noopener,noreferrer");
-  };
-  document.getElementById("viewer").classList.add("active");
-  document.getElementById("viewer").scrollIntoView({behavior:"smooth"});
-}
-
-function closeViewer() {
-  document.getElementById("gameFrame").src = "about:blank";
-  document.getElementById("viewer").classList.remove("active");
-  currentUrl = "";
-}
-
-function backToGames() {
-  closeViewer();
-  document.getElementById("gameGrid").scrollIntoView({behavior:"smooth"});
+function openGame(url) {
+  window.open(url, "_blank", "noopener,noreferrer");
 }
 
 function filterCourses() {
-  const query = document.getElementById("search").value.toLowerCase();
   const category = document.getElementById("category").value;
-  const progress = document.getElementById("progress").value;
-  const sort = document.getElementById("sort").value;
-  const grid = document.getElementById("courseGrid");
-  const cards = [...grid.querySelectorAll(".card")];
+  const search = document.getElementById("search").value.toLowerCase();
+  const courses = document.querySelectorAll(".course");
+  let visible = 0;
 
-  cards.sort((a,b) => {
-    const result = a.dataset.name.localeCompare(b.dataset.name,"ca");
-    return sort === "az" ? result : sort === "za" ? -result : 0;
+  courses.forEach(course => {
+    const matchesCategory =
+      category === "all" || course.dataset.category === category;
+    const matchesSearch =
+      course.textContent.toLowerCase().includes(search);
+
+    const show = matchesCategory && matchesSearch;
+    course.style.display = show ? "" : "none";
+
+    if (show) visible++;
   });
 
-  cards.forEach(card => {
-    const matchesText = card.dataset.name.toLowerCase().includes(query);
-    const matchesCategory = category === "all" || card.dataset.category === category;
-    const amount = Number(card.dataset.progress);
-    const matchesProgress = progress === "all" ||
-      (progress === "started" && amount > 0) ||
-      (progress === "notstarted" && amount === 0);
-
-    card.hidden = !(matchesText && matchesCategory && matchesProgress);
-    grid.appendChild(card);
-  });
-
-  document.getElementById("empty").style.display =
-    cards.some(card => !card.hidden) ? "none" : "block";
+  document.getElementById("noCourses").style.display =
+    visible === 0 ? "block" : "none";
 }
 </script>
+
 </body>
 </html>
+
